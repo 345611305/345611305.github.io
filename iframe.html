@@ -1,0 +1,171 @@
+<head>
+    <title>HTML Coding Simulator</title>
+    <script>
+        function saveDefault() {
+            const al = "<script>window.addEventListener('error', event => {alert(event.message)})<\/script>"
+            document.getElementById('iframe').srcdoc = `<script>window.addEventListener('error', event => {document.body.innerText = \`\$\{event.message\}\`/**alert(event.message)/**/})<\/script><style>body { overflow-wrap: break-word; height: 100%; } </style><body>${document.getElementById('input').value || "<h1>Hello, World!</h1>"}</body>`; 
+            localStorage.setItem('code', document.getElementById('input').value)
+        }
+        window.onload = () => {
+            document.getElementById('input').value = localStorage.getItem('code');
+            setTimeout(saveDefault, 1)
+        }
+        function js() {
+            URL.apply("javascript:alert('Hello, World!')")
+            alert("Hello, World!!")
+        }
+    </script>
+</head>
+
+<textarea id="input" style="width: 50%; max-width: 50%; min-width: 50%; height: 100%; max-height: 100%; min-height: 100%; position: fixed; top: 0; left: 0; border: 5px solid #000;" placeholder="
+<h1>Hello, World!</h1>
+<!--
+Type HTML here...
+
+
+Use <script> For Javascript
+
+
+And Use <style> For CSS
+-->
+" oninput="saveDefault()"></textarea>
+
+<iframe id="iframe" srcdoc="" style="width: 50%; height: 50%; position: fixed; top: -1; right: 0; border: 5px solid #000; border-left: 0; " sandbox="allow-scripts allow-same-origin allow-modals"></iframe>
+
+<iframe id="iframe2" srcdoc="
+
+<html>
+<head>
+<style>
+    .blocker {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        color: white;
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        font-weight: 900;
+        font-size: 100px;
+        text-align: center;
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        /* This controls the speed of the fade */
+        transition: opacity 3s ease-in-out; 
+    }
+</style>
+</head>
+<body>
+
+    <div class='blocker' id='A'>
+        Savestates
+        (Locked🔒)
+    </div>
+
+<script>
+    const startScreen = document.getElementById('A');
+
+    const handleStart = () => {
+        let password = 'idk'
+        if (prompt('Enter the password (totaly not idk)') == password) {
+            startScreen.innerText = 'Welcome🔓'
+            startScreen.style.opacity = '0';
+            
+
+            setTimeout(() => {
+                startScreen.remove();
+            }, 3000); 
+        }
+        else {
+            startScreen.innerText = `WRONG🔒❌`
+            setTimeout(()=>{
+                startScreen.innerText = 
+                    `Savestates
+                    (Locked🔒)`
+            }, 2000)
+        }
+    };
+
+    startScreen.onclick = handleStart;
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter' && document.getElementById('A')) {
+            handleStart();
+        }
+    });
+</script>
+
+</body>
+</html>
+
+
+<style>
+    body { text-align: center; font-family: sans-serif; margin: 0; padding: 10px; display: flex; flex-direction: column; height: 100vh; box-sizing: border-box; }
+    #list { flex-grow: 1; overflow-y: auto; border-top: 1px solid #ccc; padding-top: 10px; margin-top: 10px; }
+    .save-item { display: flex; justify-content: center; align-items: center; gap: 5px; margin-bottom: 8px; }
+    .del-btn { color: white; background: #ff4d4d; border: none; cursor: pointer; border-radius: 3px; padding: 2px 8px; }
+    .load-btn { cursor: pointer; flex-shrink: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 70%; }
+</style>
+<body>
+    <p>When you click on a savestate, all of your current progress will be lost unless you have saved it.</p>
+    <div>
+        <input id='name' placeholder='Save name...'>
+        <button onclick='save()'>Save Current</button>
+    </div>
+    <div id='list'></div>
+
+    <script>
+        const n = document.getElementById('name');
+        const l = document.getElementById('list');
+        const mainInput = window.parent.document.getElementById('input');
+
+        function save() {
+            if(n.value) {
+                localStorage.setItem('ss_' + n.value, mainInput.value);
+                n.value = '';
+                show();
+            }
+        }
+
+        function removeSave(key) {
+            localStorage.removeItem(key);
+            show();
+        }
+
+        function show() {
+            l.innerHTML = '';
+            Object.keys(localStorage).filter(k => k.startsWith('ss_')).sort().forEach(k => {
+                const div = document.createElement('div');
+                div.className = 'save-item';
+                
+                const loadBtn = document.createElement('button');
+                loadBtn.className = 'load-btn';
+                loadBtn.innerText = k.replace('ss_', '');
+                loadBtn.onclick = () => {
+                    mainInput.value = localStorage.getItem(k);
+                    window.parent.saveDefault();
+                };
+
+                const delBtn = document.createElement('button');
+                delBtn.className = 'del-btn';
+                delBtn.innerText = 'X';
+                delBtn.onclick = (e) => { if (confirm(`Delete ${loadBtn.innerHTML}? 
+
+This cannot be undone.`)) {e.stopPropagation(); removeSave(k);} };
+
+                div.appendChild(loadBtn);
+                div.appendChild(delBtn);
+                l.appendChild(div);
+            });
+        }
+        show();
+    </script>
+</body>
+" style="width: 50%; height: 49%; position: fixed; bottom: 0; left: 50%; border: 5px solid #000; border-left: 0; border-top: 5px solid #fff;"></iframe>
+
+<!-- new -->
+<iframe id="iframe3" srcdoc="" style="display: none; width: 25%; height: 50%; position: fixed; bottom: 0; right: 0; border: 5px solid #000; border-left: 0; border-top: 0;"></iframe>
