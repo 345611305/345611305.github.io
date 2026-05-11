@@ -139,10 +139,12 @@ h3 {
         <iframe srcdoc="
             <script>
                 const timer = 'https://damient21.github.io/code-editor'
-                const form = 'https://forms.gle/EpWPFVaGmyiDsYWW9'
+                function feedback() {
+                    window.open('https://forms.gle/EpWPFVaGmyiDsYWW9')
+                }
             </script>
             <button onclick='window.parent.location.replace(timer)'>To Coding Simulator</button><br>
-            <button onclick='window.open(form)'>Send feedback</button>
+            <button onclick='feedback()'>Send feedback</button>
             " style='width:min-content; height:60px; border: 5px solid #000;'></iframe>
         <!--<div id="o" style="font-weight: 900;">Battery: --%</div><!--  -->
         <!--<div id="battery" style="z-index: 1000; font-weight: bold;">Battery: --%</div><!--  -->
