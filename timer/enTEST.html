@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
 <meta charset="UTF-8">
 <title>Damien's Official Screensaver&copy;</title>
-
-<!-- Integrated System Component Styling -->
+<link rel="icon" href="/../favicon.png">
 <style>
 html, body {
     margin: 0;
@@ -12,6 +13,16 @@ html, body {
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     color: white;
     overflow: hidden;
+    white-space: nowrap;
+}
+.bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transition: opacity 4s ease-in-out;
+    z-index: -1;
 }
 .container {
     display: flex;
@@ -19,8 +30,14 @@ html, body {
     justify-content: space-between;
     height: 50%;
     padding: 50px;
+    width: 100%;
 }
 .clock {
+    font-size: 90px;
+    font-weight: 600;
+    text-align: center;
+}
+.iclock {
     font-size: 90px;
     font-weight: 600;
     text-align: center;
@@ -29,15 +46,16 @@ html, body {
     display: flex;
     justify-content: space-between;
     font-size: 40px;
+    width: 90%;
 }
 .blocker {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    color: black;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:white;
+    color:black;
     font-weight: 900;
     font-size: 150px;
     text-align: center;
@@ -51,133 +69,531 @@ html, body {
     position: fixed;
     top: 100px;
 }
-</style>
-
-<!-- Background Component Styling -->
-<style>
-.bg {
+#status1 {
+    text-align: left;
+    font-size: 30px;
+    width: 220px;
     position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    transition: opacity 4s ease-in-out;
-    z-index: -1;
-}
-</style>
-
-<!-- Battery Component Styling -->
-<style>
-#battery {
-    z-index: 1000;
-    font-weight: bold;
-    transition: color 1s ease-in-out;
+    top: 200px;
 }
 #o {
     font-size: 40px;
     font-weight: 900;
-    position: fixed;
-    right: 48.5px;
-    transition: color 1s ease-in-out;
+}
+.bottom-bar {
+    bottom: 0;
+    justify-content: space-between;
+    height: 100px;
+    white-space: nowrap;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    text-align: center;
+}
+.settings {
+    width: 9%;
+    display: inline-block;
+}
+ispan {
+    font-size: 62px;
+    font-weight: 600;
+}
+h3 {
+    /*padding-top: 25px;*/
+    font-size: 100px;
+    font-weight: bolder;
 }
 </style>
+<!-- <script> Below is the Internet status -->
+<script>
+    // Function to update the status display
+    function updateOnlineStatus(event) {
+        var statusElement = document.getElementById("status");
+        if (navigator.onLine) {
+            statusElement.innerHTML = "Internet Status: Online";
+        } else {
+            statusElement.innerHTML = "Internet Status: Offline";
+        }
+    }
+    
+    // Add event listeners for online and offline events
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+
+    // Initial check when the page loads
+    window.onload = updateOnlineStatus;
+    setInterval(updateOnlineStatus, 1000)
+</script>
 </head>
 <body>
-
-<div class="blocker" id="A"><br>Click to start!</div>
-
-<!-- Background Canvas Layers -->
+    
 <div id="bg1" class="bg"></div>
 <div id="bg2" class="bg"></div>
+<div class="container" id="default">
 
-<div class="container">
-    <div class="top-bar">
-        <div id="weather">Weather: Loading...</div>
-        <div id="o" style="font-weight: 900;">Battery: --%</div>
-        <div id="battery">Battery: --%</div>
+
+    <div id="r" class="top-bar">
+        <div id="weather" onclick="window.open('https://www.theweathernetwork.com/en/city/ca/ontario/north-york/current', 'newwindow', 'width=1518px,height=853px'); return false;">Weather: Loading...</div>
+        <iframe srcdoc="
+            <script>
+                const timer = 'https://damient21.github.io/code-editor'
+                function feedback() {
+                    window.parent.open('https://forms.gle/EpWPFVaGmyiDsYWW9')
+                }
+            </script>
+            <button onclick='window.parent.location.replace(timer)'>To Coding Simulator</button><br>
+            <button onclick='feedback()'>Send feedback</button>
+            " style='width:min-content; height:60px; border: 5px solid #000; position: fixed; top: 7%; right:5%;'></iframe>
+        <!--<div id="o" style="font-weight: 900;">Battery: --%</div><!--  -->
+        <!--<div id="battery" style="z-index: 1000; font-weight: bold;">Battery: --%</div><!--  -->
     </div>
 
+
     <div class="clock" id="notClock" style="font-size: 45px;">Toggle Modes</div>
-    <div class="clock" id="clock">00:00:00</div>
-    <div class="clock" id="date">Date</div>
+
+    <div class="iclock" id="clock">00:00:00</div>
+
+    <div class="iclock" id="note"></div>
+    
+    <div class="iclock" id="date">Date</div>
+
     <div class="clock" id="full" style="font-size: 30px;">Toggle Fullscreen</div>
-    <div class="clock" id="links" style="font-size: 30px;">Links</div>
+
     <div class="clock" id="status"></div>
+
+    <div class="bottom-bar" id="options">
+        <h3 style="margin: 0; font-size: 20px; align-self: center;" id="options2">Timer Settings: (In Minutes)</h3><br>
+        <div id="cl" style="display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; text-align: center; width: 90%">
+            <ispan class="settings" onclick="setT(5)">5</ispan>
+            <ispan class="settings" onclick="setT(10)">10</ispan>
+            <ispan class="settings" onclick="setT(15)">15</ispan>
+            <ispan class="settings" onclick="setT(20)">20</ispan>
+            <ispan class="settings" onclick="setT(25)">25</ispan>
+            <ispan class="settings" onclick="setT(30)">30</ispan>
+            <ispan class="settings" onclick="setT(35)">35</ispan>
+            <ispan class="settings" onclick="setT(40)">40</ispan>
+            <ispan class="settings" onclick="setT(45)">45</ispan>
+            <ispan class="settings" onclick="setT(50)">50</ispan>
+            <ispan class="settings" onclick="setT(55)">55</ispan>
+            <ispan class="settings" onclick="setT(60)">60</ispan>
+            <ispan class="settings" onclick="setT(65)">65</ispan>
+            <ispan class="settings" onclick="setT(70)">70</ispan>
+            <ispan class="settings" onclick="setT(75)">75</ispan>
+            <ispan class="settings" onclick="setT(80)">80</ispan>
+            <ispan class="settings" onclick="setT(85)">85</ispan>
+            <ispan class="settings" onclick="setT(90)">90</ispan>
+            <ispan class="settings" onclick="setT(95)">95</ispan>
+            <ispan class="settings" onclick="setT(100)">100</ispan>
+            <ispan class="settings" onclick="specific()">Custom</ispan>
+        </div>
+    </div>
 </div>
-
-<!-- Load Modular Script Packages from /root/tools/ -->
-<script src="/../tools/background.js"></script>
-<script src="/../tools/clock.js"></script>
-<script src="/../tools/weather.js"></script>
-<script src="/../tools/battery.js"></script>
-
-<!-- Global Master Window Configuration Logic -->
+<!--===============
+    Timer stuff
+================-->
 <script>
-function updateOnlineStatus() {
-    const statusElement = document.getElementById("status");
-    statusElement.innerHTML = navigator.onLine ? "Internet Status: Online" : "Internet Status: Offline";
+function setT(m) { 
+    hours = 0; 
+    seconds = 1; 
+    minutes = m; 
+    timer(); 
 }
-window.addEventListener('online', updateOnlineStatus);
-window.addEventListener('offline', updateOnlineStatus);
-window.onload = updateOnlineStatus;
-setInterval(updateOnlineStatus, 1000);
 
-notClock.onclick = () => {
-    window.location.href = 'file:///home/chronos/u-c4e7e83e5ef3697176f1df9839e5497577cd93bf/MyFiles/Coding/ai.html';
+let appState = JSON.parse(localStorage.getItem("sys-state")) || { version: "clock" };
+let version = appState.version;
+const all = document.getElementsByClassName("clock")
+const all1 = document.getElementsByClassName("top-bar")
+const all2 = document.getElementsByClassName("bottom-bar")
+let del = "f"
+cl.onclick = () => {
+    pause = "f"
+    fullTimer()
+}
+function fullTimer() {
+    if (version == "timer") {
+        del = "t"
+        Array.from(all).forEach(el => {
+            el.style.display = "none"
+        });
+        Array.from(all1).forEach(el => {
+            el.style.display = "none"
+        });
+        Array.from(all2).forEach(el => {
+            el.style.display = "none"
+        });
+
+        document.getElementById("clock").style.fontSize = "350px"
+        document.getElementById("default").style.padding = "0px"
+        document.getElementById("note").innerText = 
+        `Click the timer to return home.`
+        seconds += 1
+        timer()
+    }
+}
+function clean1() {
+    if (del == "f") {
+        document.getElementById("note").innerText = 
+        null;
+    }
+}
+window.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+        unfulltimer()
+    }
+})
+clock.onclick = () => {
+    unfulltimer()
+}
+
+function unfulltimer() {
+    if (del == "t") {
+        del = "f"
+        document.getElementById("clock").style.fontSize = "90px"
+        document.getElementById("default").style.padding = "50px"
+        Array.from(all).forEach(el => {
+            el.style.display = "block"
+        });
+        Array.from(all1).forEach(el => {
+            el.style.display = "block"
+        });
+        Array.from(all2).forEach(el => {
+            el.style.display = "block"
+        });
+        document.getElementById("note").innerText = 
+        ``
+        seconds += 1
+        timer()
+        clean1()
+    }
+    else {
+        fullTimer()
+    }
+}
+
+window.onload = () => {
+    if (version === "timer") {
+        document.getElementById("options").style.display = "block";
+        document.getElementById("options2").style.display = "block";
+        timer();
+    } else {
+        document.getElementById("options").style.display = "none";
+        document.getElementById("options2").style.display = "none";
+        updateClock();
+        updateDate();
+    }
 };
 
-function launchScreensaver() {
-    if (confirm(`This is the first screensaver that Damien has coded.\n\nThis site will reload when you close your computer.\n\nThis site is NOT meant to be used at page size 200 or higher, and is intended to be used at page size 125%, or 100%.\n\nWith these precautions, do you still wish to continue?`)) {
-        alert('Welcome to the screensaver!');
-        document.getElementById('A').remove();
-        if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen();
+function specific() {
+    let p = prompt("Choose how many minutes you want the timer running for:", "10")
+    if (p){
+        if (p > 1441) {
+            p = 1441
+        }
+        hours = 0
+        //minutes = Number(p);
+        minutes = parseInt(p, 10);
+        seconds = 2
+    }
+}
+
+document.getElementById("options").style.display = "none";
+document.getElementById("options2").style.display = "none";
+
+notClock.onclick = () => {
+    if (version == "clock") {
+        version = "timer";
+        localStorage.setItem("sys-state", JSON.stringify({ version: version }));
+        document.getElementById("options").style.display = "block";
+        document.getElementById("options2").style.display = "block";
+        timer();
+    } else {
+        version = "clock";
+        localStorage.setItem("sys-state", JSON.stringify({ version: version }));
+        document.getElementById("options").style.display = "none";
+        document.getElementById("options2").style.display = "none";
+        updateClock();
+        updateDate();
+    }
+};
+
+function resetTimer() {
+    if (pause == "f") {
+        pause = "t";
+        document.getElementById('clock').innerText = 
+        `Paused`;
+        document.getElementById("date").innerHTML = "<reset type='button' onclick='resetTimer()'>Resume timer</reset>";
+    }
+    else {
+        pause = "f";
+        seconds += 1;
+        timer()
+    }
+}
+
+let seconds = 1;
+let minutes = 45;
+let hours = 0;
+
+function format1() {
+        if (seconds <= 0) {
+            minutes -= 1;
+            seconds = 60;
+        }
+        if (minutes == 0 && hours >= 1) {
+            hours -= 1;
+            minutes = 60;
+        }
+        if (minutes > 60) {
+            minutes -= 60;
+            hours += 1;
+        }
+}
+function format() {
+    format1()
+    format1()
+    format1()
+    format1()
+    format1()
+    format1()
+    format1()
+    format1()
+    format1()
+    format1()
+    format1()
+    format1()
+    format1()
+    format1()
+    format1()
+    format1()
+    format1()
+    format1()
+    format1()
+    format1()
+    format1()
+    format1()
+    format1()
+    format1()
+}
+let pause = "f"
+
+
+
+function timer() {
+    if (seconds == 0 && minutes == 0 && hours == 0) {
+        document.getElementById("clock").innerText = `DONE!`;
+        document.getElementById("note").innerText = 
+        `Click "Done!" to set another timer.`
+        clean1()
+    } 
+    else {
+        if (pause == "f") {
+            format()
+            seconds--;
+            if (version == "timer") {
+                let formattedMinutes = String(minutes).padStart(2, '0');
+                let formattedSeconds = String(seconds).padStart(2, '0');
+                let formattedHours = String(hours).padStart(2, '0');
+                if (del == "f") {
+                    if (hours > 0) {
+                        document.getElementById("clock").innerText = `Timer: ${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+                    }
+                    else {
+                        document.getElementById("clock").innerText = `Timer: ${formattedMinutes}:${formattedSeconds}`;
+                    }
+                }
+                else {
+                    if (hours > 0) {
+                        let formattedHours = String(hours).padStart(2, '0');
+                        document.getElementById("clock").innerText = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+                    }
+                    else {
+                        document.getElementById("clock").innerText = `${formattedMinutes}:${formattedSeconds}`;
+                    }
+                }
+                if (document.hidden) {
+                    // Tab is now inactive
+                    document.title = `Timer: ${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+                    //document.title = `Bloxd.io - Play Free Online Games!`;
+                } 
+
+                //document.getElementById("clock").innerText = `Timer: ${formattedMinutes}:${formattedSeconds}`;
+                document.getElementById("date").innerHTML = "<reset type='button' onclick='resetTimer()'>Pause timer</reset>";
+            }
         }
     }
 }
+setInterval(timer, 1000);
 
-A.onclick = launchScreensaver;
+</script>
 
-document.addEventListener('keydown', (event) => {
-    if (event.key === "Enter") launchScreensaver();
+<!--====================
+Screensaver Fundamentals
+=====================-->
+<script>
+function updateClock() {
+    if (version == "clock") {
+        document.getElementById("clock").innerText =
+            new Date().toLocaleTimeString('en-US', {hour:"numeric", minute:"2-digit", second:"2-digit", hour12: true});
+    } /*
+    else {
+        document.getElementById("date").innerText =
+            new Date().toLocaleTimeString('en-US', {hour:"numeric", minute:"2-digit", second:"2-digit", hour12: true});
+    }/*  */
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+function updateDate() {
+    if (version == "clock") {
+        document.getElementById("date").innerText = new Date().toLocaleDateString();
+    }
+}
+setInterval(updateDate, 1000);
+updateDate();
+document.addEventListener('keydown', function(event) {
     if (event.key === "a") {
-        window.open('google.com', 'newwindow', 'width=1518px,height=853px');
-    }
-    if (event.key === "c") {
-        window.open('google.com', 'newwindow', 'width=1518px,height=853px');
-    }
-    if (event.key === "l") {
-        let link = prompt('Search', 'https://');
-        if (link) handleBloxdRouting(link);
-    }
-    if (event.key === "b") {
-        if (confirm('Play Bloxd.io?')) handleBloxdRouting('https://bloxd.io');
+        window.open('https://docs.google.com/spreadsheets/d/1aD-gkVpsBEiOZ4aVRIVzXktNw1s0KDrk7WIeoUqbh04/edit?gid=0#gid=0', 'newwindow', 'width=4000px,height=2000px'); 
+        return false;
     }
 });
 
-function handleBloxdRouting(link) {
-    if (link === 'https://bloxd.io') {
-        if (confirm("Damien's Account (thenewkid1234), or Darren's account(newcomer_)? 'OK' is Damien's account, and 'Cancel' is Darren's account.")) {
-            window.open('https://bloxd.io', 'newwindow', 'width=1518px,height=853px');
-        } else {
-            window.open('file:///home/chronos/u-c4e7e83e5ef3697176f1df9839e5497577cd93bf/MyFiles/Coding/bloxd.html', 'newwindow', 'width=1518px,height=853px');
-        }
-    } else {
-        window.open(link, 'newwindow', 'width=1518px,height=853px');
-    }
-}
-
-links.onclick = () => {
-    window.location.href = 'file:///home/chronos/u-c4e7e83e5ef3697176f1df9839e5497577cd93bf/MyFiles/Coding/Screensaver/screensaverlinks.html';
-};
-
 full.onclick = () => {
-    if (!document.fullscreenElement) {
+    if(!document.fullscreenElement){
         document.documentElement.requestFullscreen();
     } else {
         document.exitFullscreen();
     }
 };
+
+const gradients = [
+    "linear-gradient(315deg,#ff0000,#ff8800)",
+    "linear-gradient(315deg,#ff8800,#00cc00)",
+    "linear-gradient(315deg,#00cc00,#00cc00,#4a86e8)",
+    "linear-gradient(315deg,#4a86e8,#4a86e8,#ff00ff)",
+    "linear-gradient(315deg,#ff00ff,#ff0000)"
+];
+
+let index = 0;
+
+const bg1 = document.getElementById("bg1");
+const bg2 = document.getElementById("bg2");
+
+bg1.style.background = gradients[0];
+bg1.style.opacity = 1;
+bg2.style.opacity = 0;
+
+function switchBackground() {
+    const current = index % gradients.length;
+    const next = (index + 1) % gradients.length;
+
+    const topLayer = index % 2 === 0 ? bg2 : bg1;
+    const bottomLayer = index % 2 === 0 ? bg1 : bg2;
+
+    topLayer.style.background = gradients[next];
+    topLayer.style.opacity = 1;
+    bottomLayer.style.opacity = 0;
+
+    index++;
+}
+
+setInterval(switchBackground, 4000);
+
+/* BATTERY */
+if (navigator.getBattery) {
+    navigator.getBattery().then(battery => {
+        function updateBattery() {
+            const level = Math.round(battery.level * 100);
+            // Show a bolt icon if charging, otherwise just the percentage
+            const chargingIcon = battery.charging ? "⚡" : "";
+            
+            document.getElementById("battery").innerText = 
+                `Battery: ${level}%${chargingIcon}`;
+            if (level <= 25) {
+                document.getElementById('battery').style.color = 'red';
+            }
+            else {
+                if (level <= 55) {
+                    document.getElementById('battery').style.color = 'orange'
+                }
+                else {
+                    if (level <= 90) {
+                        document.getElementById('battery').style.color = 'yellow'
+                    }
+                    else {
+                        document.getElementById('battery').style.color = 'green'
+                    }
+                }
+            }
+            document.getElementById("o").innerText = 
+                `Battery: ${level}%${chargingIcon}`;
+        }
+    
+        updateBattery();
+    
+        battery.addEventListener("chargingchange", updateBattery);
+        battery.addEventListener("levelchange", updateBattery);
+    });
+} else {
+    document.getElementById("battery").innerText = "Battery: N/A";
+}
+
+/* WEATHER */
+function temp() {
+    fetch("https://api.open-meteo.com/v1/forecast?latitude=43.65&longitude=-79.38&current_weather=true")
+    .then(r => r.json())
+    .then(data => {
+        if (data.current_weather) {
+            document.getElementById("weather").innerText =
+                "Temperature: " + data.current_weather.temperature + "°C";
+        }
+    })
+    .catch(() => {
+        document.getElementById("weather").innerText = "Weather Unavaliable";
+    });
+}
+
+setInterval(temp, 1000)
+temp()
+
 </script>
+
+<script>
+// Store the original title
+const originalTitle = document.title;
+
+document.addEventListener("visibilitychange", () => {
+    
+    if (document.hidden) {
+        //window.open("file:///media/fuse/drivefs-943af7618645e8e834c8adf41ddd943c/root/Coding/timer.html")
+    
+        //*
+        // Tab is now inactive
+        let formattedMinutes = String(minutes).padStart(2, '0');
+        let formattedSeconds = String(seconds).padStart(2, '0');
+        let formattedHours = String(hours).padStart(2, '0');
+        document.title = `Timer: ${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+    } 
+    else {
+        // Tab is active again
+        document.title = "Welcome Back! ✨";
+        // Reset to original after 2 seconds
+        setTimeout(() => {
+            document.title = originalTitle;
+        }, 2000);//*/
+    }
+});
+
+</script>
+
 </body>
 </html>
+<!--  -->
+
+<!--
+:         _______  _                                                 :
+:        / .     \/ | _       _       _                              :
+:       |__         |   _   _   _   _   _                            :
+:        \_______/\_|     _       _       _                          :
+-->
