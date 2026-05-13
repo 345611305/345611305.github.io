@@ -1,5 +1,16 @@
 /* 
-HTML Placement:
+HTML & CSS Setup:
+<style>
+  .bg {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      transition: opacity 4s ease-in-out; /* The CSS transition for color fades */
+      z-index: -1;
+  }
+</style>
 <div id="bg1" class="bg"></div>
 <div id="bg2" class="bg"></div>
 */
@@ -17,7 +28,6 @@ let index = 0;
 const bg1 = document.getElementById("bg1");
 const bg2 = document.getElementById("bg2");
 
-// Set up the initial visual layer states
 bg1.style.background = gradients[0];
 bg1.style.opacity = 1;
 bg2.style.opacity = 0;
@@ -34,5 +44,4 @@ function switchBackground() {
     index++;
 }
 
-// Trigger smooth opacity switch transitions every 4 seconds
 setInterval(switchBackground, 4000);
