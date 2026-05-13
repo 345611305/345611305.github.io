@@ -1,7 +1,10 @@
 /* 
-HTML Placement:
-<div id="clock">00:00:00</div>
-<div id="date">Date</div>
+HTML & CSS Setup:
+<style>
+  .clock { font-size: 90px; font-weight: 600; text-align: center; }
+</style>
+<div id="clock" class="clock">00:00:00</div>
+<div id="date" class="clock">Date</div>
 */
 
 function updateClock() {
@@ -13,10 +16,7 @@ function updateDate() {
     document.getElementById("date").innerText = new Date().toLocaleDateString();
 }
 
-// Set up independent 1-second interval cycles
 setInterval(updateClock, 1000);
 setInterval(updateDate, 1000);
-
-// Run immediately on page load
 updateClock();
 updateDate();
