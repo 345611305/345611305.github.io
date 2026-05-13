@@ -6,4 +6,10 @@ THIS PROJECT OR ANYTHING ON MY GITHUB PROFILE MAY BE COPIED, EDITED, OR REPUBLIS
 
 # Consequences
 
-If any part of this code is copied, You will be legally accused of copyright and Copyright Infringement.
+If any part of this code is copied, You will be legally accused of copyright and Copyright Infringement. (Exceptions below)
+
+# Free to use
+
+You may copy sections of the javascript, such as the weather, battery, clock, timer, but not the background's exact colors.
+
+Use of the same formatting is prohibited.
