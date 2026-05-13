@@ -1,5 +1,7 @@
 # Homepage for Damien's code
 
+Please visit the LICENCE.md at https://github.com/damient21/damient21.github.io/blob/main/LICENCE.md for rules on using this code.
+
 Active sites:
 
   Timers:
