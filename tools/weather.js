@@ -12,7 +12,7 @@ document.getElementById("weather").onclick = () => {
 };
 
 function temp() {
-    fetch("open-meteo.com")
+    fetch("https://api.open-meteo.com/v1/forecast?latitude=43.65&longitude=-79.38&current_weather=true")
     .then(r => r.json())
     .then(data => {
         if (data.current_weather) {
