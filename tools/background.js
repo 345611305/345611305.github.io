@@ -43,5 +43,5 @@ function switchBackground() {
 
     index++;
 }
-switchBackground()
+switchBackground();
 setInterval(switchBackground, 4000);
