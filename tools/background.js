@@ -7,7 +7,7 @@ HTML & CSS Setup:
       height: 100%;
       top: 0;
       left: 0;
-      transition: opacity 4s ease-in-out; /* The CSS transition for color fades */
+      transition: opacity 4s ease-in-out;
       z-index: -1;
   }
 </style>
