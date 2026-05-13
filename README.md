@@ -1,7 +1,7 @@
 # Homepage for Damien's code
 
 Please visit the LICENCE.md at https://github.com/damient21/damient21.github.io/blob/main/LICENCE.md for rules on using this code.
-
+Anything that has nameTEST.html instead of name.html is only a test and is not for use casually, unless you would like to test it.
 Active sites:
 
   Timers:
