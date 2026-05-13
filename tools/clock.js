@@ -1,5 +1,5 @@
 /* 
-HTML & CSS Setup:
+HTML & CSS Setup: 
 <style>
   .clock { font-size: 90px; font-weight: 600; text-align: center; }
 </style>
