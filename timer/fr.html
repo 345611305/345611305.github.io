@@ -192,6 +192,16 @@ h3 {
 
     <div id="r" class="top-bar">
         <div id="weather" onclick="window.open('https://www.theweathernetwork.com/en/city/ca/ontario/north-york/current', 'newwindow', 'width=1518px,height=853px'); return false;">Weather: Loading...</div>
+        <iframe srcdoc="
+            <script>
+                const timer = 'https://damient21.github.io/code-editor'
+                function feedback() {
+                    window.parent.open('https://forms.gle/EpWPFVaGmyiDsYWW9')
+                }
+            </script>
+            <button onclick='window.parent.location.replace(timer)'>To Coding Simulator</button><br>
+            <button onclick='feedback()'>Send feedback</button>
+        " style='width:min-content; height:60px; border: 5px solid #000; position: fixed; top: 7%; right:5%;'></iframe>
         <!--<div id="o" style="font-weight: 900;">Battery: --%</div><!--  -->
         <!--<div id="battery" style="z-index: 1000; font-weight: bold;">Battery: --%</div><!--  -->
     </div>
